@@ -1,0 +1,4 @@
+URxvt*background: #000000
+URxvt*foreground: #FFFFFF
+XTerm*background: #000000
+XTerm*foreground: #FFFFFF
