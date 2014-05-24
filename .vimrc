@@ -12,7 +12,7 @@ filetype plugin indent on
 "-- Vundle setup end
 
 "-- Configuration
-syntax on
+syntax enable
 
 set smarttab
 set expandtab
