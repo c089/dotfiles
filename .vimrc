@@ -10,12 +10,15 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-git'
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()
 filetype plugin indent on
 "-- Vundle setup end
 
 "-- Configuration
+set background=dark
+colorscheme base16-bright
 syntax enable
 
 set smarttab
