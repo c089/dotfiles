@@ -1,3 +1,6 @@
+XTerm*faceName: Liberation Mono
+XTerm*faceSize: 10
+
 ! Base16 Bright
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
