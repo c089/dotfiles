@@ -39,3 +39,24 @@ syntax enable
 set smarttab
 set expandtab
 set shiftwidth=4
+
+" Unite plugin configuration
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:unite_source_history_yank_enable = 1
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts =
+  \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+  \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" Unite key bindings
+nnoremap [unite]   <Nop>
+nmap <Space> [unite]
+nnoremap <silent> [unite]f :<C-u>Unite -start-insert file_rec/async<cr>
+nnoremap <silent> [unite]g :<C-u>Unite grep:.<cr>
+nnoremap <silent> [unite]t :<C-u>Unite tab<cr>
+nnoremap <silent> [unite]bu :<C-u>Unite buffer<cr>
+nnoremap <silent> [unite]bo :<C-u>Unite bookmark<cr>
+nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
