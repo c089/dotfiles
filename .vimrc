@@ -1,20 +1,23 @@
 " Installation notes: Before starting vim with this vimrc, run:
-" $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" Then launch vim and use :PluginInstall
+" $ curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+" vim should ask to install bundles on startup, otherwise use :NeoBundleInstall
 
-"-- Vundle setup
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" NeoBundle setup
+if has('vim_starting')
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-git'
-Plugin 'chriskempson/base16-vim'
+" My bundles
+NeoBundle 'tpope/vim-git'
+NeoBundle 'chriskempson/base16-vim'
 
-call vundle#end()
+call neobundle#end()
 filetype plugin indent on
-"-- Vundle setup end
+NeoBundleCheck
+" NeoBundle setup end
 
 "-- Configuration
 set background=dark
