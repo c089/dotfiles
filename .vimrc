@@ -12,6 +12,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Install bundles
 NeoBundle 'tpope/vim-git'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'Shougo/Unite.vim'
 " vimproc bundle
