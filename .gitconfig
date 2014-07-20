@@ -3,3 +3,5 @@
         name = Christoph Neuroth
 [push]
         default = simple
+[core]
+	excludesfile = /Users/chris/.gitignore
