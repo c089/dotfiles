@@ -41,6 +41,8 @@ set smarttab
 set expandtab
 set shiftwidth=4
 
+set hlsearch
+
 " Unite plugin configuration
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_history_yank_enable = 1
