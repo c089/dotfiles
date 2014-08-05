@@ -15,6 +15,7 @@ NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'Shougo/Unite.vim'
+NeoBundle 'vimwiki/vimwiki'
 " vimproc bundle
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -63,3 +64,6 @@ nnoremap <silent> [unite]t :<C-u>Unite tab<cr>
 nnoremap <silent> [unite]bu :<C-u>Unite buffer<cr>
 nnoremap <silent> [unite]bo :<C-u>Unite bookmark<cr>
 nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
+
+" VimWiki
+let g:vimwiki_list = [{'path': '~/dev/vimwiki'}]
