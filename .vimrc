@@ -66,4 +66,4 @@ nnoremap <silent> [unite]bo :<C-u>Unite bookmark<cr>
 nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
 
 " VimWiki
-let g:vimwiki_list = [{'path': '~/dev/vimwiki'}]
+let g:vimwiki_list = [{'path': '~/dev/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
