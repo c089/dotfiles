@@ -13,9 +13,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Install bundles
 NeoBundle 'tpope/vim-git'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'Shougo/Unite.vim'
 NeoBundle 'vimwiki/vimwiki'
+NeoBundle 'juvenn/mustache.vim'
+NeoBundle 'slimv.vim'
+NeoBundle 'ntpeters/vim-better-whitespace'
 " vimproc bundle
 let vimproc_updcmd = has('win64') ?
       \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
@@ -44,14 +48,15 @@ set shiftwidth=4
 
 set hlsearch
 
+set showtabline=2 " always show tabline
+
 " Unite plugin configuration
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:unite_source_history_yank_enable = 1
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts =
-  \ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-  \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  \ '--line-numbers --nocolor --nogroup --hidden'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
