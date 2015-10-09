@@ -5,4 +5,4 @@
         default = simple
 [core]
 	excludesfile = /Users/chris/.gitignore
-	editor = mvim -f
+	editor = emacsclient -t -a \"\"
