@@ -25,6 +25,8 @@
      shell
      syntax-checking
      haskell
+     html
+     react
      scala
      javascript
      typescript
