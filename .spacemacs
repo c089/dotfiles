@@ -250,11 +250,10 @@ layers configuration. You are free to put any user code."
 
   (defun mocha-current-file (&optional args)
     (interactive)
-    (let ((default-directory (projectile-project-root))
-          (compile-command
-           (format "./node_modules/.bin/mocha --no-colors %s %s"
-                   (or args "") (shell-quote-argument (buffer-file-name)))))
-      (call-interactively #'compile))
+    (set (make-local-variable 'compile-command)
+         (format "./node_modules/.bin/mocha --no-colors %s %s"
+                 (or args "") (shell-quote-argument (buffer-file-name))))
+    (call-interactively #'compile)
     )
 
   (spacemacs/set-leader-keys "[t" 'mocha-current-file)
