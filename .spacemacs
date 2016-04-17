@@ -248,14 +248,16 @@ layers configuration. You are free to put any user code."
     (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
   (ad-activate 'ansi-term)
 
-  (defun mocha-current-file ()
+  (defun mocha-current-file (&optional args)
     (interactive)
-    (projectile-with-default-dir (projectile-project-root)
-      (async-shell-command
-       (format "mocha --watch --color --reporter min --opts test/unit/mocha.opts %s"
-               (shell-quote-argument (buffer-file-name))))))
-  (evil-leader/set-key "]]" 'mocha-current-file)
+    (let ((default-directory (projectile-project-root))
+          (compile-command
+           (format "./node_modules/.bin/mocha --no-colors %s %s"
+                   (or args "") (shell-quote-argument (buffer-file-name)))))
+      (call-interactively #'compile))
+    )
 
+  (spacemacs/set-leader-keys "[t" 'mocha-current-file)
   (setq magit-last-seen-setup-instructions "1.4.0")
   )
 
