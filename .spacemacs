@@ -273,6 +273,7 @@ you should place you code here."
   (spacemacs/set-leader-keys "[v" 'mocha-current-file-vaamo)
 
   (setq magit-last-seen-setup-instructions "1.4.0")
+  (editorconfig-mode t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
