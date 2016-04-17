@@ -5,7 +5,6 @@
     toolsEnv = with pkgs; buildEnv {
       name = "toolsEnv";
       paths = [
-        fish
         emacs24Macport
         aspell
         aspellDicts.de
