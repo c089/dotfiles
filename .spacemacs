@@ -27,19 +27,20 @@ values."
      better-defaults
      emacs-lisp
      git
-     markdown
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     syntax-checking
      haskell
      html
+     javascript
+     markdown
      react
      scala
-     javascript
+     spell-checking
+     syntax-checking
      typescript
-     yaml
      version-control
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
