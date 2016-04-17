@@ -7,6 +7,9 @@
       paths = [
         fish
         emacs24Macport
+        aspell
+        aspellDicts.de
+        aspellDicts.en
         git
         silver-searcher
       ];
