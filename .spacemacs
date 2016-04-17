@@ -238,13 +238,6 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  (setq editorconfig-mode t)
-  )
-
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration. You are free to put any user code."
   (defadvice ansi-term (after advise-ansi-term-coding-system)
     (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
   (ad-activate 'ansi-term)
@@ -257,8 +250,28 @@ layers configuration. You are free to put any user code."
     (call-interactively #'compile)
     )
 
+  (defun hc-react-mocha-current-file ()
+    (interactive) (mocha-current-file "--opts test/unit/mocha.opts"))
+
+  (defun mocha-current-file-vaamo ()
+    (interactive) (mocha-current-file))
+
   (spacemacs/set-leader-keys "[t" 'mocha-current-file)
+  (spacemacs/set-leader-keys "[T" 'mocha-current-file-set)
+  (spacemacs/set-leader-keys "[m" 'hc-react-mocha-current-file)
+  (spacemacs/set-leader-keys "[v" 'mocha-current-file-vaamo)
+
   (setq magit-last-seen-setup-instructions "1.4.0")
+  (setq editorconfig-mode t)
+  )
+
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place you code here."
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
