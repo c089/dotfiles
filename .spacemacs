@@ -327,6 +327,11 @@ you should place your code here."
 
   (setq magit-last-seen-setup-instructions "1.4.0")
   (editorconfig-mode t)
+
+  (require 'flycheck-flow)
+  (flycheck-add-mode 'javascript-flow 'js2-mode)
+  (flycheck-add-mode 'javascript-flow 'react-mode)
+  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
