@@ -330,6 +330,8 @@ you should place your code here."
   (setq magit-last-seen-setup-instructions "1.4.0")
   (editorconfig-mode t)
 
+  (exec-path-from-shell-copy-env "SSL_CERT_FILE")
+
   (require 'flycheck-flow)
   (flycheck-add-mode 'javascript-flow 'js2-mode)
   (flycheck-add-mode 'javascript-flow 'react-mode)
