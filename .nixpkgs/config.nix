@@ -5,11 +5,12 @@
     toolsEnv = with pkgs; buildEnv {
       name = "toolsEnv";
       paths = [
-        emacs24Macport
+        emacs
         aspell
         aspellDicts.de
         aspellDicts.en
         git
+        jdk8
         silver-searcher
       ];
     };
