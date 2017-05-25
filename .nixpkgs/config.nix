@@ -12,6 +12,8 @@
         git
         jdk8
         silver-searcher
+        nox
+        nodejs
       ];
     };
   };
