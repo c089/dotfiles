@@ -341,7 +341,6 @@ you should place your code here."
   (setq magit-last-seen-setup-instructions "1.4.0")
   (editorconfig-mode t)
 
-  (exec-path-from-shell-copy-env "PATH")
   (exec-path-from-shell-copy-env "SSL_CERT_FILE")
   (setenv "LANG" "en_US.UTF-8")
 
