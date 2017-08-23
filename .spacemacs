@@ -347,6 +347,16 @@ you should place your code here."
   (require 'flycheck-flow)
   (flycheck-add-mode 'javascript-flow 'js2-mode)
   (flycheck-add-mode 'javascript-flow 'react-mode)
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/8078
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
+  (add-hook 'js2-init-hook
+            '(lambda ()
+               (setq next-error-function 'flycheck-next-error)
+               )
+            )
+
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   ;; use local eslint from node_modules before global
   ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
