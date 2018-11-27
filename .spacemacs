@@ -40,17 +40,14 @@ This function should only modify configuration layer settings."
      auto-completion
      better-defaults
      emacs-lisp
-     floobits
      git
      haskell
      html
      javascript
      markdown
      org
-     php
      ranger
      react
-     scala
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -65,7 +62,11 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(flycheck-flow editorconfig)
+   ;; To use a local version of a package, use the `:location' property:
+   ;; '(your-package :location "~/path/to/your-package/")
+   ;; Also include the dependencies as they will not be resolved automatically.
+   dotspacemacs-additional-packages '()
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -164,6 +165,7 @@ It should only modify the values of Spacemacs settings."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner 'doge
+
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -450,12 +452,11 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
   (defadvice ansi-term (after advise-ansi-term-coding-system)
     (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
   (ad-activate 'ansi-term)
@@ -468,26 +469,10 @@ you should place your code here."
     (call-interactively #'compile)
     )
 
-  (defun hc-react-mocha-current-file ()
-    (interactive) (mocha-current-file "--opts test/unit/mocha.opts"))
-
-  (defun mocha-current-file-vaamo ()
-    (interactive) (mocha-current-file))
-
   (spacemacs/set-leader-keys "[t" 'mocha-current-file)
-  (spacemacs/set-leader-keys "[T" 'mocha-current-file-set)
-  (spacemacs/set-leader-keys "[m" 'hc-react-mocha-current-file)
-  (spacemacs/set-leader-keys "[v" 'mocha-current-file-vaamo)
 
   (setq magit-last-seen-setup-instructions "1.4.0")
   (editorconfig-mode t)
-
-  (exec-path-from-shell-copy-env "SSL_CERT_FILE")
-  (setenv "LANG" "en_US.UTF-8")
-
-  (require 'flycheck-flow)
-  (flycheck-add-mode 'javascript-flow 'js2-mode)
-  (flycheck-add-mode 'javascript-flow 'react-mode)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/8078
   (setq js2-mode-show-parse-errors nil)
@@ -498,7 +483,6 @@ you should place your code here."
                )
             )
 
-  (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   ;; use local eslint from node_modules before global
   ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
   (defun my/use-eslint-from-node-modules ()
@@ -513,37 +497,5 @@ you should place your code here."
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
   )
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (treepy graphql pcre2el log4e gntp json-snatcher json-reformat parent-mode request haml-mode fringe-helper git-gutter+ git-gutter pos-tip pkg-info epl flx iedit anzu highlight web-completion-data dash-functional tern ghc bind-map auto-complete popup f org-category-capture flyspell-correct haskell-mode skewer-mode markdown-mode alert yaml-mode which-key web-mode use-package tide typescript-mode spaceline powerline paradox orgit org-present org-mime org-download mwim js2-refactor multiple-cursors intero hydra htmlize hl-todo helm-swoop helm-projectile helm-make helm-company gitconfig-mode gitattributes-mode git-timemachine flycheck-haskell flycheck-flow exec-path-from-shell evil-matchit evil-magit ensime sbt-mode editorconfig dumb-jump define-word auto-compile packed adaptive-wrap ace-link company smartparens evil flycheck gitignore-mode helm helm-core avy magit magit-popup git-commit ghub with-editor dash projectile org-plus-contrib yasnippet php-mode inf-ruby js2-mode simple-httpd s xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill undo-tree toc-org tagedit spinner solarized-theme smeargle slim-mode shell-pop scss-mode scala-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rake rainbow-delimiters pug-mode popwin phpunit phpcbf php-extras php-auto-yasnippets persp-mode org-projectile org-pomodoro org-bullets open-junk-file noflet neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc indent-guide hungry-delete hlint-refactor hindent highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-mode-manager helm-hoogle helm-gitignore helm-flx helm-descbinds helm-css-scss helm-c-yasnippet helm-ag haskell-snippets goto-chg google-translate golden-ratio gnuplot git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-elm flx-ido floobits fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode elisp-slime-nav drupal-mode diminish diff-hl csv-mode company-web company-tern company-statistics company-ghci company-ghc company-cabal column-enforce-mode coffee-mode cmm-mode clean-aindent-mode chruby bundler bind-key auto-yasnippet auto-highlight-symbol auto-dictionary async aggressive-indent ace-window ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (ranger treepy graphql pcre2el log4e gntp json-snatcher json-reformat parent-mode request haml-mode fringe-helper git-gutter+ git-gutter pos-tip pkg-info epl flx iedit anzu highlight web-completion-data dash-functional tern ghc bind-map auto-complete popup f org-category-capture flyspell-correct haskell-mode skewer-mode markdown-mode alert yaml-mode which-key web-mode use-package tide typescript-mode spaceline powerline paradox orgit org-present org-mime org-download mwim js2-refactor multiple-cursors intero hydra htmlize hl-todo helm-swoop helm-projectile helm-make helm-company gitconfig-mode gitattributes-mode git-timemachine flycheck-haskell flycheck-flow exec-path-from-shell evil-matchit evil-magit ensime sbt-mode editorconfig dumb-jump define-word auto-compile packed adaptive-wrap ace-link company smartparens evil flycheck gitignore-mode helm helm-core avy magit magit-popup git-commit ghub with-editor dash projectile org-plus-contrib yasnippet php-mode inf-ruby js2-mode simple-httpd s xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen unfill undo-tree toc-org tagedit spinner solarized-theme smeargle slim-mode shell-pop scss-mode scala-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rake rainbow-delimiters pug-mode popwin phpunit phpcbf php-extras php-auto-yasnippets persp-mode org-projectile org-pomodoro org-bullets open-junk-file noflet neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc indent-guide hungry-delete hlint-refactor hindent highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-mode-manager helm-hoogle helm-gitignore helm-flx helm-descbinds helm-css-scss helm-c-yasnippet helm-ag haskell-snippets goto-chg google-translate golden-ratio gnuplot git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-elm flx-ido floobits fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode elisp-slime-nav drupal-mode diminish diff-hl csv-mode company-web company-tern company-statistics company-ghci company-ghc company-cabal column-enforce-mode coffee-mode cmm-mode clean-aindent-mode chruby bundler bind-key auto-yasnippet auto-highlight-symbol auto-dictionary async aggressive-indent ace-window ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
