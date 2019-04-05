@@ -495,6 +495,9 @@ before packages are loaded."
       (when (and eslint (file-executable-p eslint))
         (setq-local flycheck-javascript-eslint-executable eslint))))
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+  (setq org-directory "~/Documents/org/")
+  (setq org-agenda-files (list org-directory))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
