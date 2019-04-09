@@ -518,7 +518,10 @@ before packages are loaded."
         (alltodo ""
                  ((org-agenda-todo-ignore-scheduled (quote all))
                   (org-agenda-overriding-header "Unscheduled Tasks"))))
-       nil nil))))
+       nil nil)
+      ("r" "Review" agenda ""
+                 ((org-agenda-start-with-log-mode '(closed clock state))
+                  (org-agenda-archives-mode t))))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
