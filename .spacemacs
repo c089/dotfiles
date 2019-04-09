@@ -500,6 +500,25 @@ before packages are loaded."
 
   (setq org-directory "~/Documents/org/")
   (setq org-agenda-files (list org-directory))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-targets
+        '((nil :maxlevel . 3)
+          (org-agenda-files :maxlevel . 1)))
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "tasks.org" "Tasks")
+           "* TODO %?\n  %i\n:LOGBOOK:\n- Created: %U\n:END:\n  %a")
+          ("j" "Journal" entry (file+datetree "journal.org")
+           "* \%<%H:%M> %?\n  %i\n  %a" :tree-type week)))
+  (add-hook 'org-capture-mode-hook 'evil-insert-state)
+  (setq org-agenda-custom-commands
+    (quote
+     (("x" "Agenda and unscheduled TODO items"
+       ((agenda "" nil)
+        (alltodo ""
+                 ((org-agenda-todo-ignore-scheduled (quote all))
+                  (org-agenda-overriding-header "Unscheduled Tasks"))))
+       nil nil))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
