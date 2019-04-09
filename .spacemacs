@@ -49,6 +49,7 @@ This function should only modify configuration layer settings."
      org
      ranger
      react
+     semantic ; for lisp reformat
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
