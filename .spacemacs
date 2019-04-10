@@ -509,7 +509,7 @@ before packages are loaded."
         '(("t" "Todo" entry (file+headline "tasks.org" "Tasks")
            "* TODO %?\n  %i\n:LOGBOOK:\n- Created: %U\n:END:\n  %a")
           ("j" "Journal" entry (file+datetree "journal.org")
-           "* \%<%H:%M> %?\n  %i\n  %a" :tree-type week)))
+           "* \%<%H:%M> %?\n  %i\n %U\n\n %a" :tree-type week)))
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
   (setq org-agenda-custom-commands
     (quote
