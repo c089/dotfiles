@@ -511,6 +511,7 @@ before packages are loaded."
           ("j" "Journal" entry (file+datetree "journal.org")
            "* \%<%H:%M> %?\n  %i\n %U\n\n %a" :tree-type week)))
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
+  (add-hook 'org-insert-heading-hook 'evil-insert-state)
   (setq org-agenda-custom-commands
     (quote
      (("x" "Agenda and unscheduled TODO items"
