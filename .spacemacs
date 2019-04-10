@@ -499,7 +499,7 @@ before packages are loaded."
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   (setq org-directory "~/Documents/org/")
-  (setq org-agenda-files (list org-directory))
+  (setq org-agenda-files (list "tasks.org" "calendar.org"))
   (setq org-refile-use-outline-path 'file)
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-targets
