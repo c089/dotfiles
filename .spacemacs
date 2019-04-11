@@ -508,9 +508,9 @@ before packages are loaded."
           (org-agenda-files :maxlevel . 1)))
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline "tasks.org" "Tasks")
-           "* TODO %?\n  %i\n:LOGBOOK:\n- Created: %U\n:END:\n  %a")
+            (file "tasks.template.org"))
           ("j" "Journal" entry (file+olp+datetree "journal.org")
-           "* \%<%H:%M> %?\n  %i\n %U\n\n %a" :tree-type week)))
+            (file "journal.template.org") :tree-type week)))
   (setq org-log-into-drawer t)
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
   (add-hook 'org-insert-heading-hook 'evil-insert-state)
