@@ -498,6 +498,8 @@ before packages are loaded."
         (setq-local flycheck-javascript-eslint-executable eslint))))
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
+  (setq explicit-shell-file-name "zsh")
+
   (setq org-directory "~/Documents/org/")
   (setq org-agenda-files
         (list (concat org-directory "tasks.org") (concat org-directory "calendar.org")))
