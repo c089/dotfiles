@@ -1,4 +1,0 @@
-[submodule ".zprezto"]
-	path = .zprezto
-	url = git@github.com:c089/prezto.git
-	branch = c089
