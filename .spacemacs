@@ -507,6 +507,8 @@ before packages are loaded."
 
   (setq explicit-shell-file-name "zsh")
 
+  (setq treemacs-use-git-mode 'extended)
+
   (setq org-directory "~/Documents/org/")
   (setq org-agenda-files
         (list
