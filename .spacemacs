@@ -469,17 +469,6 @@ before packages are loaded."
   (defadvice ansi-term (after advise-ansi-term-coding-system)
     (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
   (ad-activate 'ansi-term)
-
-  (defun mocha-current-file (&optional args)
-    (interactive)
-    (set (make-local-variable 'compile-command)
-         (format "./node_modules/.bin/mocha --no-colors %s %s"
-                 (or args "") (shell-quote-argument (buffer-file-name))))
-    (call-interactively #'compile)
-    )
-
-  (spacemacs/set-leader-keys "[t" 'mocha-current-file)
-
   (setq magit-last-seen-setup-instructions "1.4.0")
   (editorconfig-mode t)
 
