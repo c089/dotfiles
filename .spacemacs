@@ -358,7 +358,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -493,8 +493,6 @@ before packages are loaded."
       (when (and eslint (file-executable-p eslint))
         (setq-local flycheck-javascript-eslint-executable eslint))))
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
-  (setq explicit-shell-file-name "zsh")
 
   (setq treemacs-use-git-mode 'extended)
 
