@@ -66,7 +66,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(add-node-modules-path)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -495,40 +495,42 @@ before packages are loaded."
   (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
   (setq treemacs-use-git-mode 'extended)
-
-  (setq org-directory "~/Documents/org/")
-  (setq org-agenda-files
-        (list
-          (concat org-directory "tasks.org")
-          (concat org-directory "calendar.org")
-          (concat org-directory "main.org")
-          (concat "/Users/chris/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org")
-          ))
-  (setq org-refile-use-outline-path 'file)
-  (setq org-outline-path-complete-in-steps nil)
-  (setq org-refile-targets
-        '((nil :maxlevel . 3)
-          (org-agenda-files :maxlevel . 3)))
-  (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "tasks.org" "Tasks")
-            (file "tasks.template.org"))
-          ("j" "Journal" entry (file+olp+datetree "journal.org")
-            (file "journal.template.org") :tree-type week)))
-  (setq org-log-into-drawer t)
-  (add-hook 'org-capture-mode-hook 'evil-insert-state)
-  (add-hook 'org-insert-heading-hook 'evil-insert-state)
-  (setq org-agenda-custom-commands
-    (quote
-     (("x" "Agenda and unscheduled TODO items"
-       ((agenda "" nil)
-        (alltodo ""
-                 ((org-agenda-todo-ignore-scheduled (quote all))
-                  (org-agenda-overriding-header "Unscheduled Tasks"))))
-       nil nil)
-      ("r" "Review" agenda ""
-                 ((org-agenda-start-with-log-mode '(closed clock state))
-                  (org-agenda-archives-mode t))))))
-  )
+  (with-eval-after-load 'org
+    (setq org-directory "~/Documents/org/")
+    (setq org-agenda-files (list (concat org-directory "tasks.org")
+                                 (concat org-directory "calendar.org")
+                                 (concat org-directory "main.org")
+                                 (concat "/Users/chris/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/inbox.org")))
+    (setq org-refile-use-outline-path 'file)
+    (setq org-outline-path-complete-in-steps nil)
+    (setq org-refile-targets '((nil :maxlevel .
+                                    3)
+                               (org-agenda-files :maxlevel .
+                                                 3)))
+    (setq org-capture-templates '(("t" "Todo"
+                                   entry
+                                   (file+headline "tasks.org" "Tasks")
+                                   (file "tasks.template.org"))
+                                  ("j" "Journal"
+                                   entry
+                                   (file+olp+datetree "journal.org")
+                                   (file "journal.template.org")
+                                   :tree-type week)))
+    (setq org-log-into-drawer t)
+    (add-hook 'org-capture-mode-hook 'evil-insert-state)
+    (add-hook 'org-insert-heading-hook 'evil-insert-state)
+    (setq org-agenda-custom-commands (quote (("x" "Agenda and unscheduled TODO items"
+                                              ((agenda "" nil)
+                                               (alltodo ""
+                                                        ((org-agenda-todo-ignore-scheduled (quote all))
+                                                         (org-agenda-overriding-header "Unscheduled Tasks"))))
+                                              nil
+                                              nil)
+                                             ("r" "Review"
+                                              agenda
+                                              ""
+                                              ((org-agenda-start-with-log-mode '(closed clock state))
+                                               (org-agenda-archives-mode t))))))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
