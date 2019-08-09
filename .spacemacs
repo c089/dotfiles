@@ -55,6 +55,7 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom)
      syntax-checking
      typescript
+     twitter
      version-control
      yaml
      )
